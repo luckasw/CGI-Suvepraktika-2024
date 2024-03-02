@@ -28,7 +28,6 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE UserMovies (
-                            USERMOVIEID INT PRIMARY KEY,
                             UserID INT,
                             MovieID INT,
                             Rating INT,
