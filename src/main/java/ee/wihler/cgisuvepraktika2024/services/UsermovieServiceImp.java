@@ -14,7 +14,7 @@ public class UsermovieServiceImp implements UsermovieService {
 
     @Override
     public List<Usermovie> getAllUsermoviesByUserId(Integer userId) {
-        return usermovieRepository.findByUserId(userId);
+        return usermovieRepository.findByUsermovieuseridId(userId);
     }
 
     @Override

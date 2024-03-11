@@ -9,15 +9,13 @@ public class Usermovie {
     @Column(name = "usermovieid", nullable = false)
     private Integer id;
 
-    @MapsId("userid")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "userid", nullable = false)
-    private User userid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usermovieuserid")
+    private User usermovieuserid;
 
-    @MapsId("movieid")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "movieid", nullable = false)
-    private Movie movieid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usermoviemovieid")
+    private Movie usermoviemovieid;
 
     @Column(name = "rating")
     private Integer rating;
@@ -30,20 +28,20 @@ public class Usermovie {
         this.id = id;
     }
 
-    public User getUserid() {
-        return userid;
+    public User getUsermovieuserid() {
+        return usermovieuserid;
     }
 
-    public void setUserid(User userid) {
-        this.userid = userid;
+    public void setUsermovieuserid(User usermovieuserid) {
+        this.usermovieuserid = usermovieuserid;
     }
 
-    public Movie getMovieid() {
-        return movieid;
+    public Movie getUsermoviemovieid() {
+        return usermoviemovieid;
     }
 
-    public void setMovieid(Movie movieid) {
-        this.movieid = movieid;
+    public void setUsermoviemovieid(Movie usermoviemovieid) {
+        this.usermoviemovieid = usermoviemovieid;
     }
 
     public Integer getRating() {

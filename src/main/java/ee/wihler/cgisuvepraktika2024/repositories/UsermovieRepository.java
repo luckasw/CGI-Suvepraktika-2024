@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface UsermovieRepository extends JpaRepository<Usermovie, Integer> {
-    List<Usermovie> findByUserId(Integer userId);
+    List<Usermovie> findByUsermovieuseridId(Integer userId);
 }
