@@ -28,12 +28,12 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE UserMovies (
+                            UserMovieID INT PRIMARY KEY,
                             UserID INT,
                             MovieID INT,
                             Rating INT,
                             FOREIGN KEY (UserID) REFERENCES Users(UserID),
                             FOREIGN KEY (MovieID) REFERENCES Movies(MovieID),
-                            PRIMARY KEY (UserID, MovieID),
                             CONSTRAINT ratingRangeCheck CHECK (Rating >= 1 and Rating <= 5)
 );
 
@@ -43,3 +43,4 @@ CREATE TABLE Screenings (
                             screening_time TIMESTAMP NOT NULL,
                             FOREIGN KEY (MovieID) REFERENCES Movies(MovieID)
 );
+

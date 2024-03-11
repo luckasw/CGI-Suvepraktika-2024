@@ -5,8 +5,9 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "usermovies")
 public class Usermovie {
-    @EmbeddedId
-    private UsermovieId id;
+    @Id
+    @Column(name = "usermovieid", nullable = false)
+    private Integer id;
 
     @MapsId("userid")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -21,11 +22,11 @@ public class Usermovie {
     @Column(name = "rating")
     private Integer rating;
 
-    public UsermovieId getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UsermovieId id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
