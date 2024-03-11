@@ -18,8 +18,12 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public Movie getMovieById(Integer id) {
-        return movieService.getMovieById(id);
+    public ResponseEntity<Movie> getMovieById(@PathVariable("id") Integer id) {
+        Movie movie = movieService.getMovieById(id);
+        if (movie == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(movie);
     }
 
     @PostMapping
