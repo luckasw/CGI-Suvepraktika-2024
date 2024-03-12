@@ -2,6 +2,8 @@ package ee.wihler.cgisuvepraktika2024.entities;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
+
 @Entity
 @Table(name = "usermovies")
 public class Usermovie {
@@ -9,16 +11,19 @@ public class Usermovie {
     @Column(name = "usermovieid", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usermovieuserid")
-    private User usermovieuserid;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "userid", nullable = false)
+    private User userid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usermoviemovieid")
-    private Movie usermoviemovieid;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "movieid", nullable = false)
+    private Movie movieid;
 
     @Column(name = "rating")
     private Integer rating;
+
+    @Column(name = "visitdate")
+    private Instant visitdate;
 
     public Integer getId() {
         return id;
@@ -28,20 +33,20 @@ public class Usermovie {
         this.id = id;
     }
 
-    public User getUsermovieuserid() {
-        return usermovieuserid;
+    public User getUserid() {
+        return userid;
     }
 
-    public void setUsermovieuserid(User usermovieuserid) {
-        this.usermovieuserid = usermovieuserid;
+    public void setUserid(User userid) {
+        this.userid = userid;
     }
 
-    public Movie getUsermoviemovieid() {
-        return usermoviemovieid;
+    public Movie getMovieid() {
+        return movieid;
     }
 
-    public void setUsermoviemovieid(Movie usermoviemovieid) {
-        this.usermoviemovieid = usermoviemovieid;
+    public void setMovieid(Movie movieid) {
+        this.movieid = movieid;
     }
 
     public Integer getRating() {
@@ -50,6 +55,14 @@ public class Usermovie {
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public Instant getVisitdate() {
+        return visitdate;
+    }
+
+    public void setVisitdate(Instant visitdate) {
+        this.visitdate = visitdate;
     }
 
 }
