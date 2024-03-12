@@ -11,7 +11,7 @@ public class Screening {
     @Column(name = "screening_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "movieid", nullable = false)
     private Movie movieid;
 

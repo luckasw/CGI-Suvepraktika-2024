@@ -18,11 +18,11 @@ public class Movie {
     @Column(name = "releasedate", nullable = false)
     private LocalDate releasedate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "genreid", nullable = false)
     private Genre genreid;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "directorid", nullable = false)
     private Director directorid;
 
