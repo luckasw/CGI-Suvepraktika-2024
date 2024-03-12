@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ee.wihler.cgisuvepraktika2024.entities.Screening;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/screenings")
@@ -17,6 +18,11 @@ public class ScreeningController {
     @GetMapping
     public List<Screening> getAllScreenings() {
         return screeningService.getAllScreenings();
+    }
+
+    @GetMapping("/recommended/{userid}")
+    public Map<Screening, Double> getScreeningWithRecommendation(@PathVariable("userid")Integer userId) {
+        return screeningService.getScreeningWithRecommendation(userId);
     }
 
     @GetMapping("/{id}")
