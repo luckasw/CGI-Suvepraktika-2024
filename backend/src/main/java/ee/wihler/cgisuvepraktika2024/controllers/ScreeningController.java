@@ -21,7 +21,7 @@ public class ScreeningController {
     }
 
     @GetMapping("/recommended/{userid}")
-    public Map<Screening, Double> getScreeningWithRecommendation(@PathVariable("userid")Integer userId) {
+    public List<Screening> getScreeningWithRecommendation(@PathVariable("userid")Integer userId) {
         return screeningService.getScreeningWithRecommendation(userId);
     }
 

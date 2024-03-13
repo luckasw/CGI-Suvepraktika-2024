@@ -18,6 +18,9 @@ public class Screening {
     @Column(name = "screening_time", nullable = false)
     private Instant screeningTime;
 
+    @Transient
+    private double recommendationScore;
+
     public Integer getId() {
         return id;
     }
@@ -40,6 +43,14 @@ public class Screening {
 
     public void setScreeningTime(Instant screeningTime) {
         this.screeningTime = screeningTime;
+    }
+
+    public double getRecommendationScore() {
+        return recommendationScore;
+    }
+
+    public void setRecommendationScore(double recommendationScore) {
+        this.recommendationScore = recommendationScore;
     }
 
 }

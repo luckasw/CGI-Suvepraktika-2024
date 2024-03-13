@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class ScreeningServiceImp implements ScreeningService {
@@ -40,17 +39,17 @@ public class ScreeningServiceImp implements ScreeningService {
     }
 
     @Override
-    public Map<Screening, Double> getScreeningWithRecommendation(Integer userId) {
+    public List<Screening> getScreeningWithRecommendation(Integer userId) {
         List<Screening> screenings = screeningRepository.findAll();
         List<Usermovie> usermovies = usermovieRepository.findByUseridId(userId);
-        HashMap<Screening, Double> screeningWithRecommendation = new HashMap<>();
+        List<Screening> screeningsWithRecommendation = new ArrayList<>();
         for (Screening screening : screenings) {
-            double recommendation = 0;
+            double recommendationScore = 0;
             for (Usermovie usermovie : usermovies) {
                 String UsermovieGenre = usermovie.getMovieid().getGenreid().getGenrename();
                 String ScreeningGenre = screening.getMovieid().getGenreid().getGenrename();
                 if (UsermovieGenre.equals(ScreeningGenre)) {
-                    recommendation += 1;
+                    recommendationScore += 1;
                 }
                 if (usermovie.getVisitdate() != null) {
                     DayOfWeek usermovieDay = usermovie.getVisitdate().atOffset(ZoneOffset.UTC).getDayOfWeek();
@@ -58,25 +57,21 @@ public class ScreeningServiceImp implements ScreeningService {
                     LocalTime usermovieTime = usermovie.getVisitdate().atOffset(ZoneOffset.UTC).toLocalTime();
                     LocalTime screeningTime = screening.getScreeningTime().atOffset(ZoneOffset.UTC).toLocalTime();
                     if (usermovieDay.equals(screeningDay)) {
-                        recommendation += 0.5;
+                        recommendationScore += 0.5;
                     }
                     if (usermovieTime.isAfter(screeningTime.minusHours(1)) && usermovieTime.isBefore(screeningTime.plusHours(1))) {
-                        recommendation += 0.5;
+                        recommendationScore += 0.5;
                     }
                 }
                 if (usermovie.getRating() != null) {
-                    recommendation += usermovie.getRating();
+                    recommendationScore += usermovie.getRating();
                 }
             }
-            screeningWithRecommendation.put(screening, recommendation);
+            screening.setRecommendationScore(recommendationScore);
+            screeningsWithRecommendation.add(screening);
         }
-        LinkedHashMap<Screening, Double> sortedScreeningWithRecommendation = new LinkedHashMap<>();
-        screeningWithRecommendation.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .forEachOrdered(x -> sortedScreeningWithRecommendation.put(x.getKey(), x.getValue()));
 
-        for (Screening screening : sortedScreeningWithRecommendation.keySet()) {
-            System.out.println(screening.getId() + " " + sortedScreeningWithRecommendation.get(screening));
-        }
-        return sortedScreeningWithRecommendation;
+        screeningsWithRecommendation.sort(Comparator.comparing(Screening::getRecommendationScore).reversed());
+        return screeningsWithRecommendation;
     }
 }

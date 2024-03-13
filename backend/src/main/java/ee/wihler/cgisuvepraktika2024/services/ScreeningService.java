@@ -10,5 +10,5 @@ public interface ScreeningService {
     Screening getScreeningById(Integer id);
     void saveScreening(Screening screening);
     void deleteScreening(Integer id);
-    Map<Screening, Double> getScreeningWithRecommendation(Integer userId);
+    List<Screening> getScreeningWithRecommendation(Integer userId);
 }
