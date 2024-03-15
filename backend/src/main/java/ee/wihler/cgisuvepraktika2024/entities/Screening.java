@@ -18,7 +18,7 @@ public class Screening {
     @Column(name = "screeningtime", nullable = false)
     private Instant screeningtime;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "seatingplanid", nullable = false)
     private Seatingplan seatingplanid;
 

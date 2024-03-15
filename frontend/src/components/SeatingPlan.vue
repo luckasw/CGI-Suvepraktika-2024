@@ -45,6 +45,7 @@ const reloadSeating = (seat, i, j) => {
 </template>
 
 <style scoped>
+
 .rows {
   display: grid;
   grid-template-columns: repeat(30, 0fr);

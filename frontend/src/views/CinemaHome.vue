@@ -4,6 +4,7 @@ import SeatingPlan from "@/components/SeatingPlan.vue";
 </script>
 
 <template>
+  <screenings />
   <seating-plan />
 </template>
 
