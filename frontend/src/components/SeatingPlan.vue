@@ -20,9 +20,13 @@ const isOccupied = (seat) => {
   }
 }
 
-const reloadSeating = (i, j) => {
-  seatingPlan.value[i][j] = 2;
-
+const reloadSeating = (seat, i, j) => {
+  if (seat != 0 && seat != 2) return;
+  if (seat == 2) {
+    seatingPlan.value[i][j] = 0;
+  } else {
+    seatingPlan.value[i][j] = 2;
+  }
 }
 </script>
 
@@ -33,7 +37,7 @@ const reloadSeating = (i, j) => {
     </div>
 <div v-for="(row, i) in seatingPlan" :key="i" class="rows">
   <div v-for="(seat, j) in row" :key="j" class="seats">
-    <div :class="isOccupied(seat)" @click="reloadSeating(i, j)">
+    <div :class="isOccupied(seat)" @click="reloadSeating(seat, i, j)" >
     </div>
   </div>
 </div>
