@@ -4,7 +4,7 @@ import { ref, onMounted} from "vue";
 const seatingPlan = ref([]);
 
 onMounted(async()  => {
-  const response = await fetch("http://localhost:8080/api/seatingplan/1");
+  const response = await fetch("http://localhost:8080/api/seatingplan/1/3");
   seatingPlan.value = await response.json();
 })
 const isOccupied = (seat) => {

@@ -4,7 +4,7 @@ import { ref, onMounted} from "vue";
 const screenings = ref([]);
 
 onMounted(async() => {
-  // const response = await fetch("http://localhost:8080/api/screenings");
+  //const response = await fetch("http://localhost:8080/api/screenings");
   const response = await fetch("http://localhost:8080/api/screenings/recommended/1");
   screenings.value = await response.json();
 })
