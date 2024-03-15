@@ -8,6 +8,7 @@ const genre = ref("all");
 const language = ref("all");
 const screeningTime = ref("");
 const people = ref(1);
+const recommend = ref(false);
 
 
 onMounted(async() => {
@@ -24,6 +25,11 @@ const sortByScreeningTime = () => {
 const sortByTitle = () => {
   screenings.value.sort((a, b) => {
     return a.movieid.title.localeCompare(b.movieid.title);
+  });
+}
+const sortByRecommendationScore = () => {
+  screenings.value.sort((a, b) => {
+    return b.recommendationScore - a.recommendationScore;
   });
 }
 const formatDate = (date) => {
@@ -57,12 +63,16 @@ const chooseSeating = async (seatingplan) => {
     }
   })
 }
+
+
+
 </script>
 
 <template>
   <div class="sort-by">
     <button @click="sortByScreeningTime()">Screening time</button>
     <button @click="sortByTitle()">Sort by title</button>
+    <button @click="sortByRecommendationScore">Sort based on viewing history</button>
     <div class="filters">
     <form>
       <input v-model.number="age" placeholder="Age restriction" />
@@ -91,7 +101,7 @@ const chooseSeating = async (seatingplan) => {
     </tr>
   </table>
 <li v-for="(screening, index) in filterScreenings" :key="index" class="screenings">
-    <div class="screening" @click="chooseSeating(screening.seatingplanid)">
+    <div class="screening">
       <table>
         <tr>
           <td> {{screening.movieid.title}} </td>
@@ -100,11 +110,14 @@ const chooseSeating = async (seatingplan) => {
           <td> {{screening.movieid.language}}</td>
           <td> {{screening.movieid.runtime}}</td>
           <td> {{screening.movieid.agerestriction}}</td>
+          <td> <button @click="chooseSeating(screening.seatingplanid)">Choose seating</button> </td>
+          <td> <button @click="rateMovie">Rate Movie</button></td>
         </tr>
-
       </table>
   </div>
 </li>
+
+
 </template>
 
 <style scoped>
