@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import CinemaHome from "@/views/CinemaHome.vue";
 import Seating from "@/views/Seating.vue";
+import RateMovie from "@/views/RateMovie.vue";
 
 const routes = [
     {
@@ -14,9 +15,19 @@ const routes = [
         component: Seating,
     },
     {
+        path: "/ratemovie",
+        name: "RateMovie",
+        component: RateMovie,
+    },
+    {
         path: '/seating/:seatingplanid/:people',
         name: 'Seating',
         component: Seating
+    },
+    {
+        path: '/ratemovie/:movieid/:visitdate',
+        name: 'RateMovie',
+        component: RateMovie
     }
 ];
 

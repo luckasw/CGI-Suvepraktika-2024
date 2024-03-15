@@ -54,7 +54,6 @@ const filterScreenings = computed(() => {
   })})
 
 const chooseSeating = async (seatingplan) => {
-  console.log(seatingplan.id + " " + people.value);
   router.push({
     name: 'Seating',
     params: {
@@ -64,7 +63,15 @@ const chooseSeating = async (seatingplan) => {
   })
 }
 
-
+const rateMovie = async (movieid, screeningtime) => {
+  router.push({
+    name: 'RateMovie',
+    params: {
+      movieid: movieid,
+      visitdate: screeningtime
+    }
+  })
+}
 
 </script>
 
@@ -111,7 +118,7 @@ const chooseSeating = async (seatingplan) => {
           <td> {{screening.movieid.runtime}}</td>
           <td> {{screening.movieid.agerestriction}}</td>
           <td> <button @click="chooseSeating(screening.seatingplanid)">Choose seating</button> </td>
-          <td> <button @click="rateMovie">Rate Movie</button></td>
+          <td> <button @click="rateMovie(screening.movieid.id, screening.screeningtime)">Rate Movie</button></td>
         </tr>
       </table>
   </div>
