@@ -3,8 +3,13 @@ import { ref, onMounted} from "vue";
 
 const seatingPlan = ref([]);
 
+const props = defineProps({
+  seatingplanid: Number,
+  people: Number
+})
+
 onMounted(async()  => {
-  const response = await fetch("http://localhost:8080/api/seatingplan/1/3");
+  const response = await fetch(`http://localhost:8080/api/seatingplan/${props.seatingplanid}/${props.people}`);
   seatingPlan.value = await response.json();
 })
 const isOccupied = (seat) => {

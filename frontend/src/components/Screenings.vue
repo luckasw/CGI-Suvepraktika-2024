@@ -1,11 +1,13 @@
 <script setup>
 import {ref, onMounted, computed} from "vue";
+import router from "@/router/index.js";
 
 const screenings = ref([]);
 const age = ref(0);
 const genre = ref("all");
 const language = ref("all");
 const screeningTime = ref("");
+const people = ref(1);
 
 
 onMounted(async() => {
@@ -44,6 +46,17 @@ const filterScreenings = computed(() => {
     }
     return true;
   })})
+
+const chooseSeating = async (seatingplan) => {
+  console.log(seatingplan.id + " " + people.value);
+  router.push({
+    name: 'Seating',
+    params: {
+      seatingplanid: seatingplan.id,
+      people: people.value
+    }
+  })
+}
 </script>
 
 <template>
@@ -62,12 +75,23 @@ const filterScreenings = computed(() => {
         <option v-for="(screening, index) in screenings" :key="index" :value="screening.movieid.language">{{screening.movieid.language}}</option>
 </select>
       <input v-model="screeningTime" type="datetime-local" placeholder="Screening time" />
+      <input v-model.number="people" placeholder="People" />
     </form>
 
     </div>
   </div>
+  <table>
+    <tr>
+      <td> Title </td>
+      <td> Screening time </td>
+      <td> Genre </td>
+      <td> Language </td>
+      <td> Runtime </td>
+      <td> Age restriction </td>
+    </tr>
+  </table>
 <li v-for="(screening, index) in filterScreenings" :key="index" class="screenings">
-    <div class="screening">
+    <div class="screening" @click="chooseSeating(screening.seatingplanid)">
       <table>
         <tr>
           <td> {{screening.movieid.title}} </td>
@@ -92,7 +116,6 @@ const filterScreenings = computed(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 0.1vh solid black;
   margin: 1vh;
   padding: 1vh;
 }
@@ -102,5 +125,15 @@ const filterScreenings = computed(() => {
 .screening td {
   border-right: 1px solid black;
   padding: 0.5em;
+}
+td {
+  border-right: 1px solid black;
+  padding: 0.5em;
+}
+table {
+  border: 1px solid black;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 </style>
