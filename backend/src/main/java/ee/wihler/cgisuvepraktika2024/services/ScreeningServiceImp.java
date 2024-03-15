@@ -53,9 +53,9 @@ public class ScreeningServiceImp implements ScreeningService {
                 }
                 if (usermovie.getVisitdate() != null) {
                     DayOfWeek usermovieDay = usermovie.getVisitdate().atOffset(ZoneOffset.UTC).getDayOfWeek();
-                    DayOfWeek screeningDay = screening.getScreeningTime().atOffset(ZoneOffset.UTC).getDayOfWeek();
+                    DayOfWeek screeningDay = screening.getScreeningtime().atOffset(ZoneOffset.UTC).getDayOfWeek();
                     LocalTime usermovieTime = usermovie.getVisitdate().atOffset(ZoneOffset.UTC).toLocalTime();
-                    LocalTime screeningTime = screening.getScreeningTime().atOffset(ZoneOffset.UTC).toLocalTime();
+                    LocalTime screeningTime = screening.getScreeningtime().atOffset(ZoneOffset.UTC).toLocalTime();
                     if (usermovieDay.equals(screeningDay)) {
                         recommendationScore += 0.5;
                     }

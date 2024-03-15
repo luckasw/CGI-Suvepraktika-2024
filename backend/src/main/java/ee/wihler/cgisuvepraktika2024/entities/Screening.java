@@ -8,15 +8,19 @@ import java.time.Instant;
 @Table(name = "screenings")
 public class Screening {
     @Id
-    @Column(name = "screening_id", nullable = false)
+    @Column(name = "screeningid", nullable = false)
     private Integer id;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "movieid", nullable = false)
     private Movie movieid;
 
-    @Column(name = "screening_time", nullable = false)
-    private Instant screeningTime;
+    @Column(name = "screeningtime", nullable = false)
+    private Instant screeningtime;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "seatingplanid", nullable = false)
+    private Seatingplan seatingplanid;
 
     @Transient
     private double recommendationScore;
@@ -37,12 +41,12 @@ public class Screening {
         this.movieid = movieid;
     }
 
-    public Instant getScreeningTime() {
-        return screeningTime;
+    public Instant getScreeningtime() {
+        return screeningtime;
     }
 
-    public void setScreeningTime(Instant screeningTime) {
-        this.screeningTime = screeningTime;
+    public void setScreeningtime(Instant screeningtime) {
+        this.screeningtime = screeningtime;
     }
 
     public double getRecommendationScore() {
@@ -51,6 +55,13 @@ public class Screening {
 
     public void setRecommendationScore(double recommendationScore) {
         this.recommendationScore = recommendationScore;
+    }
+    public Seatingplan getSeatingplanid() {
+        return seatingplanid;
+    }
+
+    public void setSeatingplanid(Seatingplan seatingplanid) {
+        this.seatingplanid = seatingplanid;
     }
 
 }
