@@ -14,7 +14,7 @@ public class SeatingPlanController {
     private SeatingPlanServiceImp seatingPlanService;
 
     @GetMapping("/{id}")
-    public Boolean[][] getSeatingPlanById(@PathVariable("id")Integer id) {
+    public Integer[][] getSeatingPlanById(@PathVariable("id")Integer id) {
         return seatingPlanService.getSeatingPlanById(id);
     }
 }
