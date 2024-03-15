@@ -41,6 +41,10 @@ CREATE TABLE UserMovies (
 
 );
 
+CREATE TABLE SeatingPlan (
+                             SeatingPlanId INT PRIMARY KEY
+)
+
 CREATE TABLE Screenings (
     ScreeningId INT PRIMARY KEY,
     MovieID INT NOT NULL,
@@ -49,7 +53,3 @@ CREATE TABLE Screenings (
     FOREIGN KEY (MovieID) REFERENCES Movies(MovieID),
     FOREIGN KEY (SeatingPlanId) REFERENCES SeatingPlan(SeatingPlanId)
 );
-
-CREATE TABLE SeatingPlan (
-    SeatingPlanId INT PRIMARY KEY
-)
