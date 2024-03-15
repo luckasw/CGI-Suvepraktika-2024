@@ -14,7 +14,7 @@ public class SeatingPlanServiceImp implements SeatingplanService {
     }
 
     private Integer[][] getRandomSeating() {
-        Integer[][] seatingPlan = new Integer[20][50];
+        Integer[][] seatingPlan = new Integer[20][30];
         for (int i = 0; i < seatingPlan[0].length; i++) {
             for (int j = 0; j < seatingPlan.length; j++) {
                 if (isOccupied()){
